@@ -1,5 +1,5 @@
 --[[
-	太阳神三国杀·幻想天使AI体系（系统模块引导文件）
+	太阳神三国杀·幻想天使AI体系（系统模块·引导文件）
 ]]--
 --当前AI体系版本
 version = "QSanguosha AI 20150000 (V0.0 Alpha)"
@@ -53,3 +53,5 @@ function SmartAI:initialize(player)
 	end
 	sgs.ais[player:objectName()] = self
 end
+--载入系统模块其他文件
+dofile "lua/ai/system/tools-ai.lua"
