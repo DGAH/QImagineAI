@@ -3,3 +3,4 @@
 ]]--
 dofile "lua/ai/adapter/interactive-ai.lua"
 dofile "lua/ai/adapter/answer_check-ai.lua"
+dofile "lua/ai/adapter/manager-ai.lua"

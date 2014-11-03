@@ -6,6 +6,13 @@ function SmartAI:filterEvent(event, player, data)
 		sgs.recorder = self
 		self.player:speak(version)
 	end
+	if not sgs.AIGlobalSystemData["AISystemStart"] then
+		sgs.AIGlobalSystemData["AISystemStart"] = true
+		local allplayers = self.room:getAllPlayers()
+		for _,p in sgs.qlist(allplayers) do
+			AddPlayerSkillsToAISystem(p)
+		end
+	end
 	if player:objectName() == self.player:objectName() then
 		local callbacks = sgs.AIEventFunc
 		if type(callbacks) == "table" then

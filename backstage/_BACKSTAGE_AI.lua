@@ -3,4 +3,4 @@
 ]]--
 dofile "lua/ai/backstage/core-ai.lua"
 --dofile "lua/ai/backstage/new_tech-ai.lua"
---dofile "lua/ai/backstage/debug-ai.lua"
+dofile "lua/ai/backstage/debug-ai.lua"

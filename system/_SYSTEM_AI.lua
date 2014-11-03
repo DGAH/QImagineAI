@@ -52,6 +52,10 @@ function SmartAI:initialize(player)
 		global_room:writeToConsole(version .. ", Powered by " .. _VERSION)
 	end
 	sgs.ais[player:objectName()] = self
+	--处理换将或复活
+	if sgs.AIGlobalSystemData["AISystemStart"] then
+		AddPlayerSkillsToAISystem(player)
+	end
 end
 --载入系统模块其他文件
 dofile "lua/ai/system/tools-ai.lua"

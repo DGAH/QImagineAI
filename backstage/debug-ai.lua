@@ -1,7 +1,7 @@
 --[[
 	太阳神三国杀·幻想天使AI体系（处理模块·错误检测文件）
 ]]--
---重写的filterEvent
+--[[重写的filterEvent
 local system_filterEvent = SmartAI.filterEvent
 function SmartAI:filterEvent(event, player, data)
 	local current = self.room:getCurrent()
@@ -26,3 +26,15 @@ function SmartAI:filterEvent(event, player, data)
 	out("------------------------------------------------")
 	system_filterEvent(self, event, player, data)
 end
+]]
+--[[查看当前AI系统中存在的技能
+sgs.AIEventFunc[sgs.TurnStart].test = function(self, player, data)
+	if player:objectName() == self.player:objectName() then
+		out("========Current Game Skills========")
+		for skill, state in pairs(sgs.AIGameSkills) do
+			out(skill)
+		end
+		out("-----------------------------------")
+	end
+end
+]]

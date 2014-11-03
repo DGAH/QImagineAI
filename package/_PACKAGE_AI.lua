@@ -3,6 +3,23 @@
 ]]--
 local files = sgs.GetFileNames("lua/ai/package")
 --[[****************************************************************
+	游戏规则部分
+]]--****************************************************************
+local rules = {
+	"gamerule", --游戏规则
+	"hegrule", --国战规则
+}
+for _,rule in ipairs(rules) do
+	local name = string.format("%s-ai.lua", string.lower(rule))
+	local path = string.format("lua/ai/package/%s", name)
+	for _,file in ipairs(files) do
+		if string.lower(file) == name then
+			dofile (path)
+			break
+		end
+	end
+end
+--[[****************************************************************
 	卡牌包部分
 ]]--****************************************************************
 local packages = {
