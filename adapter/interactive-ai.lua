@@ -1,6 +1,7 @@
 --[[
 	太阳神三国杀·幻想天使AI体系（解析模块·交互接口文件）
 ]]--
+--询问选择花色
 function SmartAI:askForSuit(reason)
 	local result = nil
 	local callback = sgs.askForSuitAI[reason]
@@ -15,6 +16,7 @@ function SmartAI:askForSuit(reason)
 	end
 	return result
 end
+--询问发动技能
 function SmartAI:askForSkillInvoke(skill_name, data)
 	local result = nil
 	local callback = sgs.askForSkillInvokeAI[skill_name]
@@ -29,6 +31,7 @@ function SmartAI:askForSkillInvoke(skill_name, data)
 	end
 	return result
 end
+--询问选择
 function SmartAI:askForChoice(skill_name, choices, data)
 	local result = nil
 	local callback = sgs.askForChoiceAI[skill_name]
@@ -43,6 +46,7 @@ function SmartAI:askForChoice(skill_name, choices, data)
 	end
 	return result
 end
+--询问弃牌
 function SmartAI:askForDiscard(reason, discard_num, min_num, optional, include_equip)
 	local result = nil
 	local callback = sgs.askForDiscardAI[reason]
@@ -55,6 +59,7 @@ function SmartAI:askForDiscard(reason, discard_num, min_num, optional, include_e
 	end
 	return result
 end
+--询问无懈可击
 function SmartAI:askForNullification(trick, from, to, positive)
 	local result = nil
 	local keys = sgs.AIGlobalSystemData["KeyNames_askForNullificationAI"]
@@ -71,6 +76,7 @@ function SmartAI:askForNullification(trick, from, to, positive)
 	end
 	return result
 end
+--询问选择卡牌
 function SmartAI:askForCardChosen(who, flags, reason, method)
 	local result = nil
 	local callback = sgs.askForCardChosenAI[reason]
@@ -83,6 +89,7 @@ function SmartAI:askForCardChosen(who, flags, reason, method)
 	end
 	return result
 end
+--询问打出卡牌
 function SmartAI:askForCard(pattern, prompt, data)
 	local result = nil
 	local promptlist = prompt:split(":")
@@ -118,6 +125,7 @@ function SmartAI:askForCard(pattern, prompt, data)
 	end
 	return result
 end
+--询问使用卡牌
 function SmartAI:askForUseCard(pattern, prompt, method)
 	local result = nil
 	local callback = sgs.askForUseCardAI[pattern]
@@ -132,6 +140,7 @@ function SmartAI:askForUseCard(pattern, prompt, method)
 	end
 	return result
 end
+--询问五谷丰登选牌
 function SmartAI:askForAG(card_ids, refusable, reason)
 	local result = nil
 	local callback = sgs.askForAGAI[reason]
@@ -146,6 +155,7 @@ function SmartAI:askForAG(card_ids, refusable, reason)
 	end
 	return result
 end
+--询问展示卡牌
 function SmartAI:askForCardShow(requestor, reason)
 	local result = nil
 	local callback = sgs.askForCardShowAI[reason]
@@ -160,6 +170,7 @@ function SmartAI:askForCardShow(requestor, reason)
 	end
 	return result
 end
+--询问遗计分配卡牌
 function SmartAI:askForYiji(card_ids, reason)
 	local resultA, resultB = nil, nil
 	local callback = sgs.askForYijiAI[reason]
@@ -172,6 +183,7 @@ function SmartAI:askForYiji(card_ids, reason)
 	end
 	return resultA, resultB
 end
+--询问拼点
 function SmartAI:askForPindian(requestor, reason)
 	local result = nil
 	local callback = sgs.askForPindianAI[reason]
@@ -184,6 +196,7 @@ function SmartAI:askForPindian(requestor, reason)
 	end
 	return result
 end
+--询问选择角色
 function SmartAI:askForPlayerChosen(targets, reason)
 	local result = nil
 	local callback = sgs.askForPlayerChosenAI[reason]
@@ -198,6 +211,7 @@ function SmartAI:askForPlayerChosen(targets, reason)
 	end
 	return result
 end
+--询问濒死求桃
 function SmartAI:askForSinglePeach(dying)
 	local result = nil
 	local keys = sgs.AIGlobalSystemData["KeyNames_askForSinglePeachAI"]
@@ -213,4 +227,15 @@ function SmartAI:askForSinglePeach(dying)
 		end
 	end
 	return result
+end
+--询问观星
+function SmartAI:askForGuanxing(cards, guanxing_type)
+	local resultA, resultB = nil, nil
+	local callback = nil
+	--Waiting For More Details
+	callback = sgs.askForGuanxingAI["system"]
+	if type(callback) == "function" then
+		resultA, resultB = callback(self, cards, guanxing_type, resultA, resultB)
+	end
+	return resultA, resultB
 end

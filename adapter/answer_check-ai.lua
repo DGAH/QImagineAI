@@ -236,3 +236,27 @@ sgs.scripts["SortCallbacks_askForSinglePeachAI"] = function()
 	table.sort(keynames, compare_func)
 	sgs.AIGlobalSystemData["KeyNames_askForSinglePeachAI"] = keynames
 end
+sgs.askForGuanxingAI["system"] = function(self, cards, guanxing_type, resultA, resultB)
+	if guanxing_type == sgs.Room_GuanxingBothSides then
+		if type(resultA) == "table" and type(resultB) == "table" then
+			if #resultA + #resultB == #cards then
+				return resultA, resultB
+			end
+		end
+		return cards, {}
+	elseif guanxing_type == sgs.Room_GuanxingUpOnly then
+		if type(resultA) == "table" and type(resultB) == "table" then
+			if #resultA == #cards and #resultB == 0 then
+				return resultA, resultB
+			end
+		end
+		return cards, {}
+	elseif guanxing_type == sgs.Room_GuanxingDownOnly then
+		if type(resultA) == "table" and type(resultB) == "table" then
+			if #resultA == 0 and #resultB == #cards then
+				return resultA, resultB
+			end
+		end
+		return {}, cards
+	end
+end

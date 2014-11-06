@@ -3,9 +3,13 @@
 ]]--
 sgs.ais = {}
 sgs.AIGlobalSystemData = {} --全局数据
+sgs.AISkills = {} --技能登记表
 sgs.AIGameSkills = {} --游戏中存在的技能
 sgs.AILockSkills = {} --游戏中无效的技能
-sgs.AISkills = {} --技能登记表
+sgs.AIRules = {} --规则登记表
+sgs.AIGameRules = {} --游戏中存在的规则
+sgs.AILockRules = {} --游戏中无效的规则
+sgs.AIMindControler = {} --幻想控制器
 sgs.AIEventFunc = {} --事件相关函数表
 for event = sgs.NonTrigger, sgs.NumOfEvents, 1 do
 	sgs.AIEventFunc[event] = {}
@@ -24,4 +28,5 @@ sgs.askForYijiAI = {}
 sgs.askForPindianAI = {}
 sgs.askForPlayerChosenAI = {}
 sgs.askForSinglePeachAI = {}
+sgs.askForGuanxingAI = {}
 sgs.ActivateAI = {}

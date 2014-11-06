@@ -64,3 +64,32 @@ for _,scenario in ipairs(scenarios) do
 		end
 	end
 end
+--[[****************************************************************
+	规范化处理
+]]--****************************************************************
+sgs.scripts["Standardization_GameRules"] = function()
+	for name, details in pairs(sgs.AISkills) do
+		if type(details) == "table" then
+			local events = details["events"]
+			if type(events) == "number" then
+				sgs.AISkills[name]["events"] = {events}
+			end
+			local related_skills = details["related_skills"]
+			if type(related_skills) == "string" then
+				sgs.AISkills[name]["related_skills"] = related_skills:split("+")
+			end
+		end
+	end
+	for name, details in pairs(sgs.AIRules) do
+		if type(details) == "table" then
+			local events = details["events"]
+			if type(events) == "number" then
+				sgs.AISkills[name]["events"] = {events}
+			end
+			local related_rules = details["related_rules"]
+			if type(related_rules) == "string" then
+				sgs.AISkills[name]["related_rules"] = related_rules:split("+")
+			end
+		end
+	end
+end
