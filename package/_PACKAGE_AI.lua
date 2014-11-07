@@ -25,6 +25,7 @@ end
 local packages = {
 	"standard_cards", --标准版
 	"maneuvering", --军争篇
+	"extra_cards", --其他卡牌扩展
 }
 for _,cardpack in ipairs(packages) do
 	local name = string.format("%s-ai.lua", string.lower(cardpack))
@@ -70,6 +71,19 @@ end
 sgs.scripts["Standardization_GameRules"] = function()
 	for name, details in pairs(sgs.AISkills) do
 		if type(details) == "table" then
+			local frequency = details["frequency"] or sgs.Skill_NotFrequent
+			sgs.AISkills[name]["frequency"] = frequency
+			local priority = details["priority"] 
+			if type(priority) ~= "number" then
+				if frequency == sgs.Skill_Wake then
+					priority = 3
+				elseif frequency == sgs.Skill_Compulsory then
+					priority = 2
+				else
+					priority = 1
+				end
+				sgs.AISkills[name]["priority"] = priority
+			end
 			local events = details["events"]
 			if type(events) == "number" then
 				sgs.AISkills[name]["events"] = {events}
@@ -82,13 +96,24 @@ sgs.scripts["Standardization_GameRules"] = function()
 	end
 	for name, details in pairs(sgs.AIRules) do
 		if type(details) == "table" then
+			local frequency = details["frequency"] or sgs.Skill_NotFrequent
+			sgs.AIRules[name]["frequency"] = frequency
+			local priority = details["priority"] 
+			if type(priority) ~= "number" then
+				if frequency == sgs.Skill_Compulsory then
+					priority = 2
+				else
+					priority = 0
+				end
+				sgs.AIRules[name]["priority"] = priority
+			end
 			local events = details["events"]
 			if type(events) == "number" then
-				sgs.AISkills[name]["events"] = {events}
+				sgs.AIRules[name]["events"] = {events}
 			end
 			local related_rules = details["related_rules"]
 			if type(related_rules) == "string" then
-				sgs.AISkills[name]["related_rules"] = related_rules:split("+")
+				sgs.AIRules[name]["related_rules"] = related_rules:split("+")
 			end
 		end
 	end

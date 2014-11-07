@@ -52,8 +52,9 @@ function SmartAI:initialize(player)
 		global_room:writeToConsole(version .. ", Powered by " .. _VERSION)
 	end
 	sgs.ais[player:objectName()] = self
-	--处理换将或复活
+	--换将或重置身份时
 	if sgs.AIGlobalSystemData["AISystemStart"] then
+		out("DEBUG:Player %s(%s) reset AI.", player:getGeneralName(), player:objectName())
 		AddPlayerSkillsToAISystem(player)
 	end
 end

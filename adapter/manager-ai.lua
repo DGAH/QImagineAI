@@ -3,23 +3,24 @@
 ]]--
 --学习技能（注：技能包括“触发技”、“视为技”、“禁止技”、“距离修正技”、“手牌上限技”、“目标增强技”等）
 local function MindControler_LearnSkill(name, object)
+	out("DEBUG:Learn skill - '%s'", name)
 	local skill = sgs.AISkills[name]
 	if type(skill) == "table" then
-		local priority = skill["priority"] 
-		if not priority then
-			local frequency = skill["frequency"] or sgs.Skill_NotFrequent
-			if frequency == sgs.Skill_Compulsory then
-				priority = 2
-			elseif frequency == sgs.Skill_Wake then
-				priority = 2
-			else
-				priority = 1
-			end
-		end
+		local priority = skill["priority"] or 1
 		local events = skill["events"] or {}
+		for _,event in ipairs(events) do
+			local pos = 1
+			for index, details in ipairs(sgs.AIMindControler[event]) do
+				local this_priority = details["priority"] or 1
+				if priority > this_priority then
+					break
+				end
+				pos = pos + 1
+			end
+			table.insert(sgs.AIMindControler[event], pos, skill)
+		end
 		local related_skills = skill["related_skills"] or {}
 		local related_rules = skill["related_rules"] or {}
-		--Waiting For More Details
 		for index, details in pairs(related_skills) do
 			if sgs.AIGameSkills[index] == nil then
 				AddSkillToAISystem(index)
@@ -36,28 +37,29 @@ local function MindControler_LearnSkill(name, object)
 end
 --忘记技能（注：技能包括“触发技”、“视为技”、“禁止技”、“距离修正技”、“手牌上限技”、“目标增强技”等）
 local function MindControler_ForgetSkill(name, object)
+	out("DEBUG:Forget skill - '%s'", name)
 	local skill = sgs.AISkills[name]
 	if type(skill) == "table" then
-		local priority = skill["priority"] 
-		if not priority then
-			local frequency = skill["frequency"] or sgs.Skill_NotFrequent
-			if frequency == sgs.Skill_Compulsory then
-				priority = 2
-			elseif frequency == sgs.Skill_Wake then
-				priority = 2
-			else
-				priority = 1
+		local events = skill["events"] or {}
+		for _,event in ipairs(events) do
+			local pos = -1
+			for index, details in ipairs(sgs.AIMindControler[event]) do
+				if details["name"] == skill["name"] then
+					pos = index
+					break
+				end
+			end
+			if pos > 0 then
+				table.remove(sgs.AIMindControler[event], pos)
 			end
 		end
-		local events = skill["events"] or {}
 		local related_skills = skill["related_skills"] or {}
-		local related_rules = skill["related_rules"] or {}
-		--Waiting For More Details
 		for index, details in pairs(related_skills) do
 			if sgs.AIGameSkills[index] ~= nil then
 				RemoveSkillFromAISystem(index)
 			end
 		end
+		local related_rules = skill["related_rules"] or {}
 		for index, details in pairs(related_rules) do
 			if sgs.AIGameRules[index] ~= nil then
 				RemoveRuleFromAISystem(index)
@@ -67,13 +69,23 @@ local function MindControler_ForgetSkill(name, object)
 end
 --学习规则
 local function MindControler_LearnRule(name)
+	out("DEBUG:Learn rule - '%s'", name)
 	local rule = sgs.AIRules[name]
 	if type(rule) == "table" then
-		local frequency = rule["frequency"] or sgs.Skill_NotFrequent
-		local priority = rule["priority"] or ( frequency == sgs.Skill_Compulsory and 2 or 0 )
+		local priority = rule["priority"] or 0
 		local events = rule["events"] or {}
+		for _,event in ipairs(events) do
+			local pos = 1
+			for index, details in ipairs(sgs.AIMindControler[event]) do
+				local this_priority = details["priority"] or 1
+				if priority > this_priority then
+					break
+				end
+				pos = pos + 1
+			end
+			table.insert(sgs.AIMindControler[event], pos, rule)
+		end
 		local related_rules = rule["related_rules"] or {}
-		--Waiting For More Details
 		for index, details in pairs(related_rules) do
 			if sgs.AIGameRules[index] == nil then
 				AddRuleToAISystem(index)
@@ -85,13 +97,23 @@ local function MindControler_LearnRule(name)
 end
 --忘记规则
 local function MindControler_ForgetRule(name)
+	out("DEBUG:Forget rule - '%s'", name)
 	local rule = sgs.AIRules[name]
 	if type(rule) == "table" then
-		local frequency = rule["frequency"] or sgs.Skill_NotFrequent
-		local priority = rule["priority"] or ( frequency == sgs.Skill_Compulsory and 2 or 0 )
 		local events = rule["events"] or {}
+		for _,event in ipairs(events) do
+			local pos = -1
+			for index, details in ipairs(sgs.AIMindControler[event]) do
+				if details["name"] == rule["name"] then
+					pos = index
+					break
+				end
+			end
+			if pos > 0 then
+				table.remove(sgs.AIMindControler[event], pos)
+			end
+		end
 		local related_rules = rule["related_rules"] or {}
-		--Waiting For More Details
 		for index, details in pairs(related_rules) do
 			if sgs.AIGameRules[index] ~= nil then
 				RemoveRuleFromAISystem(index)
@@ -136,9 +158,19 @@ function RemoveRuleFromAISystem(rule)
 end
 --将卡牌信息添加到当前AI系统
 function AddCardToAISystem(card)
+	local name = getCardName(card)
+	local details = sgs.AICards[name]
+	if type(details) == "table" then
+		--Waiting For More Details
+	end
 end
 --将卡牌信息从当前AI系统中移除
 function RemoveCardToAISystem(card)
+	local name = getCardName(card)
+	local details = sgs.AICards[name]
+	if type(details) == "table" then
+		--Waiting For More Details
+	end
 end
 --将技能添加到当前AI系统（注：技能包括“武将技能”和“装备技能”两种）
 function AddSkillToAISystem(skill)
@@ -225,7 +257,15 @@ sgs.AIEventFunc[sgs.EventLoseSkill].manager = function(self, player, data)
 	local name = data:toString()
 	RemoveSkillFromAISystem(name)
 end
+--复活（待完善）
 --死亡
+--[[与复活应成对出现
 sgs.AIEventFunc[sgs.Death].manager = function(self, player, data)
-	RemovePlayerSkillsFromAISystem(player)
+	local death = data:toDeath()
+	local victim = death.who
+	if player:objectName() == victim:objectName() then
+		out("DEBUG:Player %s(%s) dead.", player:getGeneralName(), player:objectName())
+		RemovePlayerSkillsFromAISystem(player)
+	end
 end
+]]

@@ -3,6 +3,7 @@
 ]]--
 sgs.ais = {}
 sgs.AIGlobalSystemData = {} --全局数据
+sgs.AICards = {} --卡牌登记表
 sgs.AISkills = {} --技能登记表
 sgs.AIGameSkills = {} --游戏中存在的技能
 sgs.AILockSkills = {} --游戏中无效的技能
@@ -12,6 +13,7 @@ sgs.AILockRules = {} --游戏中无效的规则
 sgs.AIMindControler = {} --幻想控制器
 sgs.AIEventFunc = {} --事件相关函数表
 for event = sgs.NonTrigger, sgs.NumOfEvents, 1 do
+	sgs.AIMindControler[event] = {}
 	sgs.AIEventFunc[event] = {}
 end
 sgs.askForSuitAI = {}

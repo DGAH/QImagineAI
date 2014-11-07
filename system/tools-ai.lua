@@ -1,6 +1,12 @@
 --[[
 	太阳神三国杀·幻想天使AI体系（系统模块·工具包文件）
 ]]--
+--输出到服务器
+function out(...)
+	if global_room then
+		global_room:writeToConsole(string.format(...))
+	end
+end
 --事件名称转换表
 sgs.eventnames = {
 	[sgs.NonTrigger] = "NonTrigger",
@@ -96,9 +102,35 @@ sgs.eventnames = {
 function getEventName(event)
 	return sgs.eventnames[event] or tostring(event) 
 end
---输出到服务器
-function out(...)
-	if global_room then
-		global_room:writeToConsole(string.format(...))
+--卡牌类型转换表
+sgs.cardtypes = {
+	["slash"] = "Slash",
+	["jink"] = "Jink",
+	["peach"] = "Peach",
+}
+--获取卡牌类型
+function getCardType(card)
+	local name = nil
+	if type(card) == "string" then
+		name = card
+	elseif type(card) == "userdata" then
+		name = card:getClassName()
 	end
+	return sgs.cardtypes[name] or name
+end
+--卡牌名称转换表
+sgs.cardnames = {
+	["Slash"] = "slash",
+	["Jink"] = "jink",
+	["Peach"] = "peach",
+}
+--获取卡牌名称
+function getCardName(card)
+	local name = nil
+	if type(card) == "string" then
+		name = card
+	elseif type(card) == "userdata" then
+		name = card:objectName()
+	end
+	return sgs.cardnames[name] or name
 end
