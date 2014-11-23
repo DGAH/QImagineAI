@@ -4,6 +4,26 @@
 --输出到服务器
 function out(...)
 	if global_room then
+		local arg = {...}
+		--测试信息
+		if not sgs.AIGlobalSystemData["DebugMode"] then
+			if string.find(arg[1], "DEBUG:") then
+				return 
+			end
+		end
+		--警告信息
+		if sgs.AIGlobalSystemData["IgnoreWarning"] then
+			if string.find(arg[1], "WARNING:") then
+				return 
+			end
+		end
+		--错误信息
+		if sgs.AIGlobalSystemData["IgnoreError"] then
+			if string.find(arg[1], "ERROR:") then
+				return 
+			end
+		end
+		--执行输出
 		global_room:writeToConsole(string.format(...))
 	end
 end

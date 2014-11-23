@@ -26,6 +26,7 @@ local packages = {
 	"standard_cards", --标准版
 	"maneuvering", --军争篇
 	"extra_cards", --其他卡牌扩展
+	"strategic_advantage", --势备篇
 }
 for _,cardpack in ipairs(packages) do
 	local name = string.format("%s-ai.lua", string.lower(cardpack))
@@ -69,6 +70,27 @@ end
 	规范化处理
 ]]--****************************************************************
 sgs.scripts["Standardization_GameRules"] = function()
+	--武将信息规范化
+	for name, details in pairs(sgs.AIGenerals) do
+		if type(details) == "table" then
+			local IQ = details["IQ"] 
+			if type(IQ) ~= "number" or IQ < 0 then
+				IQ = 100
+				details["IQ"] = IQ
+			end
+		end
+	end
+	--卡牌信息规范化
+	for name, details in pairs(sgs.AICards) do
+		if type(details) == "table" then
+			local class_name = details["class_name"] or name
+			if type(class_name) ~= "string" or class_name == "" then
+				class_name = name
+				details["class_name"] = class_name
+			end
+		end
+	end
+	--技能信息规范化
 	for name, details in pairs(sgs.AISkills) do
 		if type(details) == "table" then
 			local frequency = details["frequency"] or sgs.Skill_NotFrequent
@@ -94,6 +116,7 @@ sgs.scripts["Standardization_GameRules"] = function()
 			end
 		end
 	end
+	--规则信息规范化
 	for name, details in pairs(sgs.AIRules) do
 		if type(details) == "table" then
 			local frequency = details["frequency"] or sgs.Skill_NotFrequent

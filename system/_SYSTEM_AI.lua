@@ -59,4 +59,7 @@ function SmartAI:initialize(player)
 	end
 end
 --载入系统模块其他文件
+dofile "lua/ai/system/AIPlayer-ai.lua"
+dofile "lua/ai/system/AIRoom-ai.lua"
+dofile "lua/ai/system/AIEngine-ai.lua"
 dofile "lua/ai/system/tools-ai.lua"

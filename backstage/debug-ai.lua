@@ -1,6 +1,9 @@
 --[[
 	太阳神三国杀·幻想天使AI体系（处理模块·错误检测文件）
 ]]--
+sgs.AIGlobalSystemData["DebugMode"] = false
+sgs.AIGlobalSystemData["IgnoreWarning"] = false
+sgs.AIGlobalSystemData["IgnoreError"] = false
 --[[重写的filterEvent
 local system_filterEvent = SmartAI.filterEvent
 function SmartAI:filterEvent(event, player, data)

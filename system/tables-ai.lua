@@ -3,6 +3,7 @@
 ]]--
 sgs.ais = {}
 sgs.AIGlobalSystemData = {} --全局数据
+sgs.AIGenerals = {} --武将登记表
 sgs.AICards = {} --卡牌登记表
 sgs.AISkills = {} --技能登记表
 sgs.AIGameSkills = {} --游戏中存在的技能
