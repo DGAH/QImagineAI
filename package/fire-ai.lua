@@ -6,6 +6,7 @@
 ]]--****************************************************************
 sgs.AIGenerals["dianwei"] = {
 	name = "dianwei",
+	general = "dianwei",
 	IQ = 100,
 }
 --[[
@@ -20,6 +21,7 @@ sgs.AISkills["qiangxi"] = {
 ]]--****************************************************************
 sgs.AIGenerals["xunyu"] = {
 	name = "xunyu",
+	general = "xunyu",
 	IQ = 150,
 }
 --[[
@@ -44,6 +46,7 @@ sgs.AISkills["jieming"] = {
 ]]--****************************************************************
 sgs.AIGenerals["pangtong"] = {
 	name = "pangtong",
+	general = "pangtong",
 	IQ = 180,
 }
 --[[
@@ -68,6 +71,7 @@ sgs.AISkills["niepan"] = {
 ]]--****************************************************************
 sgs.AIGenerals["wolong"] = {
 	name = "wolong",
+	general = "zhugeliang",
 	IQ = 230,
 }
 --[[
@@ -96,6 +100,7 @@ sgs.AISkills["bazhen"] = {
 ]]--****************************************************************
 sgs.AIGenerals["taishici"] = {
 	name = "taishici",
+	general = "taishici",
 	IQ = 100,
 }
 --[[
@@ -110,6 +115,7 @@ sgs.AISkills["tianyi"] = {
 ]]--****************************************************************
 sgs.AIGenerals["yuanshao"] = {
 	name = "yuanshao",
+	general = "yuanshao",
 	lord = true,
 	IQ = 100,
 }
@@ -133,6 +139,7 @@ sgs.AISkills["xueyi"] = {
 ]]--****************************************************************
 sgs.AIGenerals["yanliangwenchou"] = {
 	name = "yanliangwenchou",
+	general = "yanliang+wenchou",
 	IQ = 100,
 }
 --[[
@@ -147,6 +154,7 @@ sgs.AISkills["shuangxiong"] = {
 ]]--****************************************************************
 sgs.AIGenerals["pangde"] = {
 	name = "pangde",
+	general = "pangde",
 	IQ = 100,
 }
 --[[

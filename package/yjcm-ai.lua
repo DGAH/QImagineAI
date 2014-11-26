@@ -6,6 +6,7 @@
 ]]--****************************************************************
 sgs.AIGenerals["caozhi"] = {
 	name = "caozhi",
+	general = "caozhi",
 	IQ = 100,
 }
 --[[
@@ -27,6 +28,7 @@ sgs.AISkills["jiushi"] = {
 ]]--****************************************************************
 sgs.AIGenerals["chengong"] = {
 	name = "chengong",
+	general = "chengong",
 	IQ = 100,
 }
 --[[
@@ -49,6 +51,7 @@ sgs.AISkills["mingce"] = {
 ]]--****************************************************************
 sgs.AIGenerals["fazheng"] = {
 	name = "fazheng",
+	general = "fazheng",
 	IQ = 100,
 }
 --[[
@@ -70,6 +73,7 @@ sgs.AISkills["xuanhuo"] = {
 ]]--****************************************************************
 sgs.AIGenerals["gaoshun"] = {
 	name = "gaoshun",
+	general = "gaoshun",
 	IQ = 100,
 }
 --[[
@@ -92,6 +96,7 @@ sgs.AISkills["jinjiu"] = {
 ]]--****************************************************************
 sgs.AIGenerals["lingtong"] = {
 	name = "lingtong",
+	general = "lingtong",
 	IQ = 100,
 }
 --[[
@@ -106,6 +111,7 @@ sgs.AISkills["xuanfeng"] = {
 ]]--****************************************************************
 sgs.AIGenerals["masu"] = {
 	name = "masu",
+	general = "masu",
 	IQ = 100,
 }
 --[[
@@ -128,6 +134,7 @@ sgs.AISkills["huilei"] = {
 ]]--****************************************************************
 sgs.AIGenerals["wuguotai"] = {
 	name = "wuguotai",
+	general = "wuguotai",
 	IQ = 100,
 }
 --[[
@@ -149,6 +156,7 @@ sgs.AISkills["buyi"] = {
 ]]--****************************************************************
 sgs.AIGenerals["xusheng"] = {
 	name = "xusheng",
+	general = "xusheng",
 	IQ = 100,
 }
 --[[
@@ -163,6 +171,7 @@ sgs.AISkills["pojun"] = {
 ]]--****************************************************************
 sgs.AIGenerals["xushu"] = {
 	name = "xushu",
+	general = "xushu",
 	IQ = 100,
 }
 --[[
@@ -185,6 +194,7 @@ sgs.AISkills["jujian"] = {
 ]]--****************************************************************
 sgs.AIGenerals["yujin"] = {
 	name = "yujin",
+	general = "yujin",
 	IQ = 100,
 }
 --[[
@@ -200,6 +210,7 @@ sgs.AISkills["yizhong"] = {
 ]]--****************************************************************
 sgs.AIGenerals["zhangchunhua"] = {
 	name = "zhangchunhua",
+	general = "zhangchunhua",
 	IQ = 100,
 }
 --[[
@@ -222,6 +233,7 @@ sgs.AISkills["shangshi"] = {
 ]]--****************************************************************
 sgs.AIGenerals["zhonghui"] = {
 	name = "zhonghui",
+	general = "zhonghui",
 	IQ = 100,
 }
 --[[

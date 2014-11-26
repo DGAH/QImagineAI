@@ -78,6 +78,11 @@ sgs.scripts["Standardization_GameRules"] = function()
 				IQ = 100
 				details["IQ"] = IQ
 			end
+			local general = details["general"]
+			if type(general) ~= "string" then
+				general = name
+				details["general"] = name
+			end
 		end
 	end
 	--卡牌信息规范化
