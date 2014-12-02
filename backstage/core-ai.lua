@@ -13,7 +13,13 @@ function SmartAI:filterEvent(event, player, data)
 			AddPlayerSkillsToAISystem(p)
 		end
 	end
+	if self == sgs.recorder then
+		if event == sgs.GameStart then
+			chooseIQLevel()
+		end
+	end
 	if player:objectName() == self.player:objectName() then
+		AddActionRecord(self, event, player, data) --记录发生的事件及相应的角色行为
 		local callbacks = sgs.AIEventFunc
 		if type(callbacks) == "table" then
 			for name, callback in pairs(callbacks[event]) do

@@ -16,6 +16,9 @@ function SmartAI:initialize(player)
 	self.player = player
 	self.room = player:getRoom()
 	self.role = player:getRole()
+	self.name1 = player:getGeneralName() or ""
+	self.name2 = player:getGeneral2Name() or ""
+	self.IQ = getPlayerIQ(self.name1, self.name2)
 	self.lua_ai = sgs.LuaAI(player)
 	self.lua_ai.callback = function(full_method_name, ...)
 		--The __FUNCTION__ macro is defined as CLASS_NAME::SUBCLASS_NAME::FUNCTION_NAME
@@ -54,7 +57,7 @@ function SmartAI:initialize(player)
 	sgs.ais[player:objectName()] = self
 	--换将或重置身份时
 	if sgs.AIGlobalSystemData["AISystemStart"] then
-		out("DEBUG:Player %s(%s) reset AI.", player:getGeneralName(), player:objectName())
+		out("DEBUG:Player %s(%s) reset AI.", self.name1, player:objectName())
 		AddPlayerSkillsToAISystem(player)
 	end
 end
@@ -62,4 +65,8 @@ end
 dofile "lua/ai/system/AIPlayer-ai.lua"
 dofile "lua/ai/system/AIRoom-ai.lua"
 dofile "lua/ai/system/AIEngine-ai.lua"
+dofile "lua/ai/system/AIScene-ai.lua"
 dofile "lua/ai/system/tools-ai.lua"
+dofile "lua/ai/system/events-ai.lua"
+dofile "lua/ai/system/iq-ai.lua"
+dofile "lua/ai/system/recorder-ai.lua"

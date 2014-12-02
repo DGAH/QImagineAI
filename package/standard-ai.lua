@@ -251,6 +251,13 @@ sgs.AISkills["tieji"] = {
 sgs.AISkills["mashu"] = {
 	name = "mashu",
 	frequency = sgs.Skill_Compulsory,
+	DistanceSkill = true,
+	correct_func = function(scene, from, to)
+		if from:hasSkill("mashu") then
+			return - 1
+		end
+		return 0
+	end,
 }
 --[[****************************************************************
 	黄月英

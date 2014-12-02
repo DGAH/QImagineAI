@@ -3,7 +3,10 @@
 ]]--
 sgs.ais = {}
 sgs.AIGlobalSystemData = {} --全局数据
+sgs.AIGlobalActionRecords = {} --行为记录表
+sgs.AIGlobalCardUseRecords = {} --卡牌使用记录表
 sgs.AIGenerals = {} --武将登记表
+sgs.AIGeneralIQ = {} --武将统一智商登记表
 sgs.AICards = {} --卡牌登记表
 sgs.AISkills = {} --技能登记表
 sgs.AIGameSkills = {} --游戏中存在的技能
@@ -12,6 +15,7 @@ sgs.AIRules = {} --规则登记表
 sgs.AIGameRules = {} --游戏中存在的规则
 sgs.AILockRules = {} --游戏中无效的规则
 sgs.AIMindControler = {} --幻想控制器
+sgs.AIEvent = {} --游戏事件表
 sgs.AIEventFunc = {} --事件相关函数表
 for event = sgs.NonTrigger, sgs.NumOfEvents, 1 do
 	sgs.AIMindControler[event] = {}

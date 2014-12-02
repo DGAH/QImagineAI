@@ -84,6 +84,13 @@ sgs.AIGenerals["neo_zhangfei"] = {
 sgs.AISkills["tannang"] = {
 	name = "tannang",
 	frequency = sgs.Skill_Compulsory,
+	DistanceSkill = true,
+	correct_func = function(scene, from, to)
+		if from:hasSkill("tannang") then
+			return - from:getLostHp()
+		end
+		return 0
+	end,
 }
 --[[****************************************************************
 	赵云

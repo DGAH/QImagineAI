@@ -53,7 +53,18 @@ sgs.AIGenerals["gongsunzan"] = {
 ]]--
 sgs.AISkills["yicong"] = {
 	name = "yicong",
-	frequency = sgs.Skill_Frequency,
+	frequency = sgs.Skill_Compulsory,
+	DistanceSkill = true,
+	correct_func = function(scene, from, to)
+		local correct = 0
+		if from:hasSkill("yicong") and from:getHp() > 2 then
+			correct = correct - 1
+		end
+		if to:hasSkill("yicong") and to:getHp() <= 2 then
+			correct = correct + 1
+		end
+		return correct
+	end,
 }
 --[[****************************************************************
 	袁术

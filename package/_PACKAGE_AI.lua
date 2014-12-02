@@ -73,21 +73,27 @@ sgs.scripts["Standardization_GameRules"] = function()
 	--武将信息规范化
 	for name, details in pairs(sgs.AIGenerals) do
 		if type(details) == "table" then
-			local IQ = details["IQ"] 
-			if type(IQ) ~= "number" or IQ < 0 then
-				IQ = 100
-				details["IQ"] = IQ
-			end
+			--武将姓名
 			local general = details["general"]
 			if type(general) ~= "string" then
 				general = name
 				details["general"] = name
+			end
+			--武将智商
+			local IQ = details["IQ"] 
+			if type(IQ) ~= "number" or IQ < 0 then
+				IQ = sgs.AIGeneralIQ[general]
+				if type(IQ) ~= "number" or IQ < 0 then
+					IQ = 100
+				end
+				details["IQ"] = IQ
 			end
 		end
 	end
 	--卡牌信息规范化
 	for name, details in pairs(sgs.AICards) do
 		if type(details) == "table" then
+			--类型名
 			local class_name = details["class_name"] or name
 			if type(class_name) ~= "string" or class_name == "" then
 				class_name = name
@@ -98,8 +104,10 @@ sgs.scripts["Standardization_GameRules"] = function()
 	--技能信息规范化
 	for name, details in pairs(sgs.AISkills) do
 		if type(details) == "table" then
+			--发动频率
 			local frequency = details["frequency"] or sgs.Skill_NotFrequent
 			sgs.AISkills[name]["frequency"] = frequency
+			--技能优先级
 			local priority = details["priority"] 
 			if type(priority) ~= "number" then
 				if frequency == sgs.Skill_Wake then
@@ -111,10 +119,12 @@ sgs.scripts["Standardization_GameRules"] = function()
 				end
 				sgs.AISkills[name]["priority"] = priority
 			end
+			--触发事件
 			local events = details["events"]
 			if type(events) == "number" then
 				sgs.AISkills[name]["events"] = {events}
 			end
+			--相关技能
 			local related_skills = details["related_skills"]
 			if type(related_skills) == "string" then
 				sgs.AISkills[name]["related_skills"] = related_skills:split("+")
@@ -124,8 +134,10 @@ sgs.scripts["Standardization_GameRules"] = function()
 	--规则信息规范化
 	for name, details in pairs(sgs.AIRules) do
 		if type(details) == "table" then
+			--触发频率
 			local frequency = details["frequency"] or sgs.Skill_NotFrequent
 			sgs.AIRules[name]["frequency"] = frequency
+			--规则优先级
 			local priority = details["priority"] 
 			if type(priority) ~= "number" then
 				if frequency == sgs.Skill_Compulsory then
@@ -135,10 +147,12 @@ sgs.scripts["Standardization_GameRules"] = function()
 				end
 				sgs.AIRules[name]["priority"] = priority
 			end
+			--触发事件
 			local events = details["events"]
 			if type(events) == "number" then
 				sgs.AIRules[name]["events"] = {events}
 			end
+			--相关规则
 			local related_rules = details["related_rules"]
 			if type(related_rules) == "string" then
 				sgs.AIRules[name]["related_rules"] = related_rules:split("+")

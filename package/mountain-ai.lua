@@ -31,6 +31,14 @@ sgs.AIGenerals["dengai"] = {
 ]]--
 sgs.AISkills["tuntian"] = {
 	name = "tuntian",
+	DistanceSkill = true,
+	correct_func = function(scene, from, to)
+		if from:hasSkill("tuntian") then
+			local fields = from:gePile("field")
+			return - fields:length()
+		end
+		return 0
+	end,
 }
 --[[
 	技能：凿险（觉醒技）

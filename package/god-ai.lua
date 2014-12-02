@@ -121,6 +121,13 @@ sgs.AISkills["guixin"] = {
 sgs.AISkills["feiying"] = {
 	name = "feiying",
 	frequency = sgs.Skill_Compulsory,
+	DistanceSkill = true,
+	correct_func = function(scene, from, to)
+		if to:hasSkill("feiying") then
+			return 1
+		end
+		return 0
+	end,
 }
 --[[****************************************************************
 	吕布
