@@ -517,7 +517,7 @@ end
 function getEventData(event, data)
 	if type(event) == "number" then
 		local AIEvent = sgs.AIEvent[event]
-		if type(AIEven) == "table" then
+		if type(AIEvent) == "table" then
 			local ExtractFunc = AIEvent["ExtractFunc"]
 			if type(ExtractFunc) == "function" then
 				return ExtractFunc(data)

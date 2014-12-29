@@ -129,6 +129,18 @@ sgs.scripts["Standardization_GameRules"] = function()
 			if type(related_skills) == "string" then
 				sgs.AISkills[name]["related_skills"] = related_skills:split("+")
 			end
+			--目标增强技
+			if details["TargetModSkill"] then
+				if type(details["residue_func"]) == "function" then
+					sgs.AISkills[name]["TMResidueSkill"] = true
+				end
+				if type(details["distance_limit_func"]) == "function" then
+					sgs.AISkills[name]["TMDistanceLimitSkill"] = true
+				end
+				if type(details["extra_target_func"]) == "function" then
+					sgs.AISkills[name]["TMExtraTargetSkill"] = true
+				end
+			end
 		end
 	end
 	--规则信息规范化

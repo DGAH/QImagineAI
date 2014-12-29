@@ -1,6 +1,15 @@
 --[[
 	太阳神三国杀·幻想天使AI体系（解析模块·资源管理文件）
 ]]--
+sgs.AIMindControler["ViewAsSkill"] = {} --视为技
+sgs.AIMindControler["FilterSkill"] = {} --锁定视为技
+sgs.AIMindControler["ProhibitSkill"] = {} --禁止技
+sgs.AIMindControler["DistanceSkill"] = {} --距离修正技
+sgs.AIMindControler["AttackRangeSkill"] = {} --攻击范围技
+sgs.AIMindControler["MaxCardsSkill"] = {} --手牌上限技
+sgs.AIMindControler["TMResidueSkill"] = {} --目标增强技（使用次数）
+sgs.AIMindControler["TMDistanceLimitSkill"] = {} --目标增强技（适用范围）
+sgs.AIMindControler["TMExtraTargetSkill"] = {} --目标增强技（目标数目）
 --学习技能（注：技能包括“触发技”、“视为技”、“禁止技”、“距离修正技”、“手牌上限技”、“目标增强技”等）
 local function MindControler_LearnSkill(name, object)
 	out("DEBUG:Learn skill - '%s'", name)
@@ -18,6 +27,33 @@ local function MindControler_LearnSkill(name, object)
 				pos = pos + 1
 			end
 			table.insert(sgs.AIMindControler[event], pos, skill)
+		end
+		if skill["ViewAsSkill"] then
+			sgs.AIMindControler["ViewAsSkill"][name] = true
+		end
+		if skill["FilterSkill"] then
+			sgs.AIMindControler["FilterSkill"][name] = true
+		end
+		if skill["ProhibitSkill"] then
+			sgs.AIMindControler["ProhibitSkill"][name] = true
+		end
+		if skill["DistanceSkill"] then
+			sgs.AIMindControler["DistanceSkill"][name] = true
+		end
+		if skill["AttackRangeSkill"] then
+			sgs.AIMindControler["AttackRangeSkill"][name] = true
+		end
+		if skill["MaxCardsSkill"] then
+			sgs.AIMindControler["MaxCardsSkill"][name] = true
+		end
+		if skill["TMResidueSkill"] then
+			sgs.AIMindControler["TMResidueSkill"][name] = true
+		end
+		if skill["TMDistanceLimitSkill"] then
+			sgs.AIMindControler["TMDistanceLimitSkill"][name] = true
+		end
+		if skill["TMExtraTargetSkill"] then
+			sgs.AIMindControler["TMExtraTargetSkill"][name] = true
 		end
 		local related_skills = skill["related_skills"] or {}
 		local related_rules = skill["related_rules"] or {}
@@ -52,6 +88,33 @@ local function MindControler_ForgetSkill(name, object)
 			if pos > 0 then
 				table.remove(sgs.AIMindControler[event], pos)
 			end
+		end
+		if skill["ViewAsSkill"] then
+			sgs.AIMindControler["ViewAsSkill"][name] = nil
+		end
+		if skill["FilterSkill"] then
+			sgs.AIMindControler["FilterSkill"][name] = nil
+		end
+		if skill["ProhibitSkill"] then
+			sgs.AIMindControler["ProhibitSkill"][name] = nil
+		end
+		if skill["DistanceSkill"] then
+			sgs.AIMindControler["DistanceSkill"][name] = nil
+		end
+		if skill["AttackRangeSkill"] then
+			sgs.AIMindControler["AttackRangeSkill"][name] = nil
+		end
+		if skill["MaxCardsSkill"] then
+			sgs.AIMindControler["MaxCardsSkill"][name] = nil
+		end
+		if skill["TMResidueSkill"] then
+			sgs.AIMindControler["TMResidueSkill"][name] = nil
+		end
+		if skill["TMDistanceLimitSkill"] then
+			sgs.AIMindControler["TMDistanceLimitSkill"][name] = nil
+		end
+		if skill["TMExtraTargetSkill"] then
+			sgs.AIMindControler["TMExtraTargetSkill"][name] = nil
 		end
 		local related_skills = skill["related_skills"] or {}
 		for index, details in pairs(related_skills) do

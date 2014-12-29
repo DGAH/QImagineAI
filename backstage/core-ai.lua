@@ -24,7 +24,9 @@ function SmartAI:filterEvent(event, player, data)
 		if type(callbacks) == "table" then
 			for name, callback in pairs(callbacks[event]) do
 				if type(callback) == "function" then
-					callback(self, player, data)
+					if name ~= "test" or sgs.AIGlobalSystemData["DebugMode"] then
+						callback(self, player, data)
+					end
 				end
 			end
 		end

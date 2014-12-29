@@ -7,20 +7,22 @@ function getGeneralIQ(name)
 		local IQ = nil
 		local details = sgs.AIGenerals[name]
 		if type(details) == "table" then
-			IQ = details["IQ"]
+			IQ = details["IQ"] --若该武将定义了智商数值，则智商为定义的数值
 		end
-		IQ = IQ or 100
+		IQ = IQ or 100 --否则取默认智商：100
 		return IQ
 	end
-	return 0
+	return 0 --若武将名不存在，智商取默认值：0
 end
 --计算一名主将名为name、副将名为name2的角色的综合智商
 function getPlayerIQ(name, name2)
 	local IQ1 = getGeneralIQ(name)
 	local IQ2 = getGeneralIQ(name2)
+	--如果存在主将，则将副将智商以40%权重计入综合智商
 	if type(name) == "string" and name ~= "" then
 		IQ2 = IQ2 * 0.4
 	end
+	--如果存在副将，则将主将智商以60%权重计入综合智商
 	if type(name2) == "string" and name2 ~= "" then
 		IQ1 = IQ1 * 0.6
 	end
@@ -81,6 +83,7 @@ function chooseIQLevel()
 					if type(ai) == "table" then
 						local IQ = ai.IQ or getPlayerIQ(ai.name1, ai.name2)
 						IQ = math.min( 1000, math.ceil( IQ * rate ) )
+						ai.IQ = IQ
 						ai.player:speak("我的智商是"..IQ.."！")
 					end
 				end
