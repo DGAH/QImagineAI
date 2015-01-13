@@ -1,6 +1,6 @@
 --[[
 	太阳神三国杀·幻想天使AI体系（引导文件）
-	神杀源码地址：https://github.com/QSanguosha/QSanguosha
+	神杀源码地址：https://github.com/Mogara/QSanguosha
 	项目源码地址：https://github.com/DGAH/QImagineAI
 ]]--
 require "middleclass"

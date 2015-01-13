@@ -471,6 +471,7 @@ sgs.AIEvent[sgs.] = {
 sgs.AIEvent[sgs.GeneralShown] = {
 	name = "GeneralShown",
 	ExtractFunc = function(data)
+		return data:toBool()
 	end,
 }
 ]]
@@ -478,6 +479,7 @@ sgs.AIEvent[sgs.GeneralShown] = {
 sgs.AIEvent[sgs.GeneralHidden] = {
 	name = "GeneralHidden",
 	ExtractFunc = function(data)
+		return data:toBool()
 	end,
 }
 ]]
@@ -485,6 +487,7 @@ sgs.AIEvent[sgs.GeneralHidden] = {
 sgs.AIEvent[sgs.GeneralRemoved] = {
 	name = "GeneralRemoved",
 	ExtractFunc = function(data)
+		return data:toString()
 	end,
 }
 ]]
